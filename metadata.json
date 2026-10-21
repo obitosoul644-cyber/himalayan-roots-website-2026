@@ -1,0 +1,8 @@
+{
+  "name": "Himalayan Roots - Handcrafted Nepali Crafts & Sustainable Gifts",
+  "description": "An authentic, elegant e-commerce experience for Himalayan Roots, showcasing handmade Lokta paper, Dhaka textiles, wooden crafts, and gift sets from Patan, Nepal.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

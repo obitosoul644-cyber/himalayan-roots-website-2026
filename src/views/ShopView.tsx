@@ -21,11 +21,11 @@ export const ShopView: React.FC<ShopViewProps> = ({
   const [inStockOnly, setInStockOnly] = useState(false);
 
   const categories: { id: ProductCategory; label: string }[] = [
-    { id: 'all', label: 'All Crafts' },
-    { id: 'paper', label: 'Lokta Paper' },
-    { id: 'textiles', label: 'Dhaka & Textiles' },
-    { id: 'wood-metal', label: 'Wood & Metal' },
-    { id: 'gifts', label: 'Gift Sets' },
+    { id: 'all', label: `All Crafts (${PRODUCTS.length})` },
+    { id: 'paper', label: `Lokta Paper (${PRODUCTS.filter((p) => p.category === 'paper').length})` },
+    { id: 'textiles', label: `Dhaka & Textiles (${PRODUCTS.filter((p) => p.category === 'textiles').length})` },
+    { id: 'wood-metal', label: `Wood & Metal (${PRODUCTS.filter((p) => p.category === 'wood-metal').length})` },
+    { id: 'gifts', label: `Gift Sets (${PRODUCTS.filter((p) => p.category === 'gifts').length})` },
   ];
 
   const filteredProducts = useMemo(() => {

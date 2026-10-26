@@ -1,4 +1,24 @@
-import { Product, Artisan, CurrencyConfig } from '../types';
+import { Product, Artisan, CurrencyConfig } from '../types';const imageModules = import.meta.glob(
+  '../assets/images/*',
+  {
+    eager: true,
+    query: '?url',
+    import: 'default',
+  }
+) as Record<string, string>;
+
+function img(path: string): string {
+  const filename = path.split('/').pop() ?? path;
+  const key = `../assets/images/${filename}`;
+  const url = imageModules[key];
+
+  if (!url) {
+    console.warn(`Missing image: ${filename}`);
+    return '';
+  }
+
+  return url;
+}
 
 export const CURRENCIES: Record<string, CurrencyConfig> = {
   NPR: { code: 'NPR', symbol: 'NPR ', rate: 1, label: 'NPR (रु)' },
@@ -17,7 +37,7 @@ export const ARTISANS: Artisan[] = [
     bio: 'Dawa learned the art of Lokta papermaking from his father high in the Himalayan foothills of Dolakha. Using sustainable Daphne bark harvested without harming the roots, he turns raw Himalayan fibers into resilient paper that naturally resists insects and lasts for centuries.',
     specialty: 'Deckle-edge paper, botanical petal embedding, sun-dried sheets',
     quote: 'Lokta lives twice—first as a mountain bush in the mist, then as words preserved for generations.',
-    image: '/src/assets/images/artisan_workshop_patan_1792565716737.jpg',
+    image: img('/src/assets/images/artisan_workshop_patan_1792565716737.jpg'),
   },
   {
     id: 'sita-shrestha',
@@ -28,7 +48,7 @@ export const ARTISANS: Artisan[] = [
     bio: 'Sita leads a cooperative of 14 women weavers specializing in traditional Nepali Dhaka cloth. Each geometric pattern is counted thread-by-thread on a wooden handloom, embodying historic Himalayan mountain motifs and ancestral symmetry.',
     specialty: 'Intricate geometric brocades, hand-dyed organic yarns',
     quote: 'When the shuttle passes through the loom, our heritage breathes through every single row.',
-    image: '/src/assets/images/artisan_workshop_patan_1792565716737.jpg',
+    image: img('/src/assets/images/artisan_workshop_patan_1792565716737.jpg'),
   },
   {
     id: 'ramesh-maharjan',
@@ -39,7 +59,7 @@ export const ARTISANS: Artisan[] = [
     bio: 'Born into generations of Newari woodcraft artisans along the cobblestone alleys of Patan Durbar Square, Ramesh carves sustainable Himalayan walnut and sal wood using hand chisels honed by his grandfather.',
     specialty: 'Floral Newari relief carvings, traditional turning, natural beeswax finishing',
     quote: 'Wood remembers the forest. The chisel only reveals the beauty that was already sleeping inside.',
-    image: '/src/assets/images/artisan_workshop_patan_1792565716737.jpg',
+    image: img('/src/assets/images/artisan_workshop_patan_1792565716737.jpg'),
   },
 ];
 
@@ -52,7 +72,7 @@ export const PRODUCTS: Product[] = [
     priceNpr: 650,
     category: 'paper',
     categoryLabel: 'Paper & Stationery',
-    image: '/src/assets/images/lokta_paper_journal_1792565713750.jpg',
+    image: img('/src/assets/images/lokta_paper_journal_1792565713750.jpg'),
     description: 'An archival-quality handcrafted notebook made from sustainably harvested Himalayan Lokta (Daphne) shrub bark. Featuring hand-sewn binding, natural deckle edges, and pressed wild Himalayan botanicals embedded right into the fibrous cover, this journal welcomes ink, watercolor, and fountain pens without bleed-through.',
     craftDetails: 'The bark of the wild Lokta bush regenerates completely within 5 to 7 years without uprooting the plant. Prepared in clear Himalayan mountain water, boiled with wood ash, and dried in the high-altitude sun on wooden mesh frames.',
     materials: ['Wild Daphne Bark (Lokta)', 'Hand-pressed Rhododendron petals', 'Natural Hemp cord tie', 'Cotton thread binding'],
@@ -75,7 +95,7 @@ export const PRODUCTS: Product[] = [
     priceNpr: 1200,
     category: 'textiles',
     categoryLabel: 'Textiles & Bags',
-    image: '/src/assets/images/dhaka_tote_bag_1792565715092.jpg',
+    image: img('/src/assets/images/dhaka_tote_bag_1792565715092.jpg'),
     description: 'A stylish, everyday tote bag handwoven by women artisans using authentic Nepali Dhaka textiles paired with heavyweight unbleached cotton canvas. Designed with reinforced webbing handles, brass snap rivets, and an inner zip compartment for keys and your phone.',
     craftDetails: 'Nepali Dhaka is woven entirely by hand on traditional wooden pit looms without electric power. The intricate diamond and zigzag motifs require immense focus, passing weft spools by hand to build each layer.',
     materials: ['Handwoven Nepali Dhaka Cotton', '100% Heavy Cotton Canvas', 'Brass hardware', 'Reinforced stitching'],
@@ -98,7 +118,7 @@ export const PRODUCTS: Product[] = [
     priceNpr: 1500,
     category: 'wood-metal',
     categoryLabel: 'Wood & Metal',
-    image: '/src/assets/images/carved_wooden_bowl_1792565715255.jpg',
+    image: img('/src/assets/images/carved_wooden_bowl_1792565715255.jpg'),
     description: 'Carved from ethically sourced fallen Himalayan walnut wood, this decorative serving and display bowl features a relief carved rim inspired by Newari temple window motifs. Finished with organic food-safe walnut oil and natural beeswax for a tactile satin sheen.',
     craftDetails: 'Turned on a traditional lathe and meticulously detailed with handheld gouges and carving chisels in Patan’s historic metal and wood carving quarter.',
     materials: ['Sustainably harvested Himalayan Walnut Wood', 'Food-safe organic cold-pressed oil', 'Natural beeswax sealant'],
@@ -121,7 +141,7 @@ export const PRODUCTS: Product[] = [
     priceNpr: 2500,
     category: 'gifts',
     categoryLabel: 'Gift Sets',
-    image: '/src/assets/images/heritage_gift_box_1792565716288.jpg',
+    image: img('/src/assets/images/heritage_gift_box_1792565716288.jpg'),
     description: 'An exquisite gift collection celebrating Nepal’s artisan traditions. Includes one handmade Lokta journal with hemp binding, a hand-cast brass lotus incense holder, a pouch of organic high-elevation Himalayan herbal tea blend, a hand-carved floral wooden bookmark, and a handwritten Nepali calligraphy blessings card.',
     craftDetails: 'Housed in an eco-friendly rigid Lokta box made by Patan papermakers. Curated to share the sensory spirit of Kathmandu Valley temples and Himalayan serenity.',
     materials: ['Handmade Lokta box & notebook', 'Cast solid brass lotus holder', 'Loose Himalayan herbal tea', 'Walnut wood bookmark'],
@@ -144,7 +164,7 @@ export const PRODUCTS: Product[] = [
     priceNpr: 450,
     category: 'paper',
     categoryLabel: 'Paper & Stationery',
-    image: '/src/assets/images/himalayan_roots_hero_1792565713723.jpg',
+    image: img('/src/assets/images/himalayan_roots_hero_1792565713723.jpg'),
     description: 'Set of 10 heavyweight Lokta paper stationery sheets pressed with genuine dried Himalayan wildflowers and marigold petals, accompanied by 10 matching handmade deckled-edge envelopes with gummed Lokta seals.',
     craftDetails: 'Sheets are individually hand-lifted on screens submerged in mountain stream vats, then sun-dried against vertical metal plates.',
     materials: ['Hand-harvested Lokta pulp', 'Wild Himalayan marigold & cornflower inclusions', 'Organic cotton sizing'],
@@ -190,7 +210,7 @@ export const PRODUCTS: Product[] = [
     priceNpr: 2800,
     category: 'wood-metal',
     categoryLabel: 'Wood & Metal',
-    image: '/src/assets/images/carved_wooden_bowl_1792565715255.jpg',
+    image: img('/src/assets/images/carved_wooden_bowl_1792565715255.jpg'),
     description: 'Traditionally hand-hammered in Patan using an ancestral alloy of bronze and seven resonant metals. Hand-tuned to sustain rich harmonic overtones for meditation, mindful breathing, and home sanctuary spaces.',
     craftDetails: 'Shaped by fire and rhythmic hammer blows by Patan metal masters whose lineage traces back to royal Malla era bronze foundries.',
     materials: ['Seven-metal bronze alloy', 'Rosewood & suede wooden striker', 'Hand-stitched silk ring cushion'],
@@ -213,7 +233,7 @@ export const PRODUCTS: Product[] = [
     priceNpr: 1850,
     category: 'gifts',
     categoryLabel: 'Gift Sets',
-    image: '/src/assets/images/heritage_gift_box_1792565716288.jpg',
+    image: img('/src/assets/images/heritage_gift_box_1792565716288.jpg'),
     description: 'A sensory tribute to morning in the Kathmandu Valley. Features a tin of first-flush high-elevation orthodox tea from the mist-covered slopes of Ilam, paired with traditional juniper and cedarwood rope incense hand-twisted in Lokta paper, accompanied by a small hand-hammered brass burner.',
     craftDetails: 'The rope incense is rolled by hand in Lalitpur using crushed Himalayan aromatic herbs wrapped in rice-water softened Lokta paper strips.',
     materials: ['Organic Ilam Orthodox Tea (75g)', 'Hand-twisted Newari rope incense (25 ropes)', 'Solid brass mini burner'],
@@ -236,7 +256,7 @@ export const PRODUCTS: Product[] = [
     priceNpr: 2800,
     category: 'textiles',
     categoryLabel: 'Textiles & Bags',
-    image: '/src/assets/images/hemp_nettle_backpack_1792643790410.jpg',
+    image: img('/src/assets/images/hemp_nettle_backpack_1792643790410.jpg'),
     description: 'Crafted from indigenous wild giant Himalayan nettle (Allo) harvested in Sankhuwasabha and durable organic hemp fibers. Features solid brass buckles, genuine vegetable-tanned leather straps, a padded 14-inch laptop compartment, and dual side water bottle pockets.',
     craftDetails: 'The nettle stems are peeled, boiled in wood ash, and beaten with wooden mallets before being hand-spun into yarn. Extremely strong, naturally antimicrobial, and completely biodegradable.',
     materials: ['Wild Himalayan Allo (Giant Nettle)', 'Organic Mountain Hemp', 'Antique solid brass hardware', 'Vegetable-tanned leather trim'],
@@ -259,7 +279,7 @@ export const PRODUCTS: Product[] = [
     priceNpr: 750,
     category: 'wood-metal',
     categoryLabel: 'Wood & Pottery',
-    image: '/src/assets/images/mithila_ceramic_mug_1792643790710.jpg',
+    image: img('/src/assets/images/mithila_ceramic_mug_1792643790710.jpg'),
     description: 'A tactile, heavyweight stoneware tea mug painted by hand with traditional Mithila folk motifs of blooming lotus petals and sacred vines. Glazed on the inside with a food-safe satin mineral glaze that retains heat beautifully.',
     craftDetails: 'Hand-thrown on a potter wheel, fired at 1,220°C for exceptional durability, and individually painted using natural mineral ochres and indigo pigments.',
     materials: ['High-fired Himalayan stoneware clay', 'Food-safe mineral ceramic glaze', 'Natural mineral pigments'],
@@ -282,7 +302,7 @@ export const PRODUCTS: Product[] = [
     priceNpr: 850,
     category: 'gifts',
     categoryLabel: 'Gift Sets',
-    image: '/src/assets/images/himalayan_herbal_soaps_1792643791186.jpg',
+    image: img('/src/assets/images/himalayan_herbal_soaps_1792643791186.jpg'),
     description: 'A luxurious three-bar collection of cold-processed artisan soaps enriched with organic high-altitude yak milk, wild juniper berries, marigold (Sayapatri) petals, and cold-pressed Chiuri (butter tree) oil. Each bar is wrapped in fibrous Lokta paper tied with raw jute twine.',
     craftDetails: 'Cured slowly for six weeks in the dry Himalayan air. Generates a rich, nourishing lather that hydrates dry skin without synthetic foaming agents.',
     materials: ['Organic High-Altitude Yak Milk', 'Wild Juniper & Cedar essential oils', 'Chiuri Butter & Coconut Oil', 'Lokta paper wrapper with marigold'],
@@ -305,7 +325,7 @@ export const PRODUCTS: Product[] = [
     priceNpr: 1950,
     category: 'wood-metal',
     categoryLabel: 'Wood & Metal',
-    image: '/src/assets/images/patan_brass_oil_lamp_1792643791785.jpg',
+    image: img('/src/assets/images/patan_brass_oil_lamp_1792643791785.jpg'),
     description: 'The Sukunda is the most iconic traditional ceremonial oil lamp of the Kathmandu Valley Newars. Hand-cast from solid brass with an integrated reservoir, handle, and a majestic Mayur (peacock) spout symbolizing light, prosperity, and blessings.',
     craftDetails: 'Cast using the ancient lost-wax (cire perdue) metal casting process in Patan’s historic metalfounding quarter, then hand-chiseled to bring out intricate feather and deity details.',
     materials: ['Solid high-grade golden brass alloy', 'Aged hand-buffed satin patina'],
@@ -328,7 +348,7 @@ export const PRODUCTS: Product[] = [
     priceNpr: 550,
     category: 'paper',
     categoryLabel: 'Paper & Stationery',
-    image: '/src/assets/images/lokta_botanical_wall_art_1792643791910.jpg',
+    image: img('/src/assets/images/lokta_botanical_wall_art_1792643791910.jpg'),
     description: 'A serene piece of botanical wall decor featuring genuine pressed Himalayan maidenhair fern specimens permanently set onto heavy, fibrous deckle-edge Lokta paper. Includes top and bottom magnetic natural oak wood hanging bars with a raw hemp cord for effortless display.',
     craftDetails: 'The ferns are carefully gathered during autumn in the Shivapuri mountain forest, pressed between wooden botanical presses for 3 weeks, and set into freshly pulled Lokta pulp before sun-drying.',
     materials: ['Hand-lifted fibrous Lokta paper', 'Real wild Himalayan ferns', 'Natural Oak wood magnetic poster hanger', 'Hemp rope'],

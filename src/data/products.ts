@@ -187,7 +187,7 @@ export const PRODUCTS: Product[] = [
     priceNpr: 3400,
     category: 'textiles',
     categoryLabel: 'Textiles & Bags',
-    image: '/src/assets/images/dhaka_tote_bag_1792565715092.jpg',
+    image: img('/src/assets/images/dhaka_tote_bag_1792565715092.jpg'),
     description: 'An exceptionally soft Himalayan wrap woven using a fine blend of local high-altitude wool and cruelty-free cotton. Finished with subtle Dhaka accent trim and delicate hand-twisted fringe.',
     craftDetails: 'Woven over 3 full days per shawl by master weavers in the hills of Eastern Nepal using traditional pit loom shuttles.',
     materials: ['Himalayan wool & cotton blend', 'Plant-derived madder & walnut dyes'],
